@@ -12,8 +12,10 @@ import React from "react";
 import Lineargradient from "../components/lineargradient";
 import CustomInput from "../components/customInput";
 import CustomButton from "../components/customButton";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback>
       <Lineargradient>
@@ -25,7 +27,10 @@ const LoginScreen = () => {
             <Text className="text-white font-bold text-4xl  my-5">Sign In</Text>
             <CustomInput label="Email:" type="email-address" />
             <CustomInput label="Password:" secureTextEntry={true} />
-            <CustomButton title="Login" />
+            <CustomButton
+              title="Login"
+              Pressed={() => navigation.navigate("main")}
+            />
             <View className="flex-row gap-1 justify-center mt-2 ">
               <Text className="text-white text-sm">Don't have an account?</Text>
               <TouchableOpacity>
