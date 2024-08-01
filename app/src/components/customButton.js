@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import React from "react";
 
 const CustomButton = ({ title, Pressed }) => {
@@ -7,7 +7,7 @@ const CustomButton = ({ title, Pressed }) => {
       onPress={Pressed}
       className="bg-purple-500 h-[50px] rounded-md flex justify-center items-center"
     >
-      <Text>{title}</Text>
+      <Text className="text-white font-bold text-xl">{title}</Text>
     </TouchableOpacity>
   );
 };

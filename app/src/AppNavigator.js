@@ -8,6 +8,9 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from "./screens/HomeScreen";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import QuizScreen from "./screens/QuizScreen";
+import QuestionScreen from "./screens/QuestionScreen";
+import AnswerScreen from "./screens/AnswerScreen";
+import { StatusBar } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -25,6 +28,13 @@ function Tablogic() {
         tabBarLabelStyle: {
           color: "white",
           fontWeight: "bold",
+        },
+        tabBarIndicatorStyle: {
+          height: 4,
+          backgroundColor: "white",
+          borderRadius: 100,
+          elevation: 11,
+          shadowColor: "red",
         },
       }}
     >
@@ -69,7 +79,10 @@ const AppNavigator = () => {
         <Stack.Screen name="auth" component={AuthScreen} />
         <Stack.Screen name="login" component={LoginScreen} />
         <Stack.Screen name="main" component={Main} />
+        <Stack.Screen name="question" component={QuestionScreen} />
+        <Stack.Screen name="answer" component={AnswerScreen} />
       </Stack.Navigator>
+      <StatusBar backgroundColor="#6441A5" />
     </NavigationContainer>
   );
 };
