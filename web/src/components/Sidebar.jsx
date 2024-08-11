@@ -30,9 +30,9 @@ function Sidebar() {
       <Link to="/" className="text-2xl font-bold">
         Admin Panel
       </Link>
-      {sideitems.map((item) => {
+      {sideitems.map((item, index) => {
         return (
-          <div className=" mt-2">
+          <div className=" mt-2" key={index}>
             <Link to={`${item.link}`} className="text-sm font-semibold">
               {item.name}
             </Link>

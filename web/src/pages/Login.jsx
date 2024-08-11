@@ -1,17 +1,50 @@
-import React from "react";
+import { toast } from "react-toastify";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
+import { BASEURL } from "../constants/Constant";
 import CustomButton from "../components/CustomButton";
+import ThreeDot from "../components/ThreeDot";
+import { CONTEXT } from "../hooks/ContextApi";
 
 function Login() {
+  const [data, setData] = useContext(CONTEXT);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const handleInput = (event) => {
-    console.log(event);
+
+  const handleInput = async (event) => {
+    const { email, password } = event;
+    setLoading(true);
+    const response = await fetch(`${BASEURL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    setLoading(false);
+    const result = await response.json();
+    if (result.status == "success") {
+      toast(result.message);
+      localStorage.setItem("token", result.token);
+      setData(result.token);
+      navigate("/");
+    } else {
+      toast(result.message);
+    }
   };
+  useEffect(() => {
+    const auth = localStorage.getItem("token");
+    if (auth) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div
       className="bg-cover bg-center bg-fixed "
@@ -61,7 +94,7 @@ function Login() {
                     value: true,
                     message: "This field is required.",
                   },
-                  maxLength: {
+                  minLength: {
                     value: 8,
                     message: "Password must be 8 characters.",
                   },
@@ -70,7 +103,7 @@ function Login() {
               <p className="error">{errors?.password?.message}</p>
             </div>
             <div className="mb-6 flex justify-center">
-              <CustomButton title="Login" />
+              <CustomButton title={loading ? <ThreeDot /> : "Login"} />
             </div>
           </form>
         </div>

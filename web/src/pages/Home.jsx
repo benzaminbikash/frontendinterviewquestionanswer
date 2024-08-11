@@ -1,11 +1,14 @@
-import React from "react";
+import React, { memo, useContext } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
+import { CONTEXT } from "../hooks/ContextApi";
 
 function Home() {
   const location = useLocation();
   const homepath = location.pathname;
+  const [user] = useContext(CONTEXT);
+  console.log(user);
   return (
     <div className="flex">
       <Sidebar />
@@ -26,4 +29,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default memo(Home);

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { BASEURL } from "../constants/Constant";
 
-function ApiGet(apiurl) {
+function ApiGet(url) {
   const [data, setData] = useState([]);
   const fetchApi = async () => {
-    const response = await fetch(apiurl);
+    const response = await fetch(`${BASEURL}/${url}`);
     const result = await response.json();
-    setData(result?.data);
+    setData(result);
   };
   useEffect(() => {
     fetchApi();
