@@ -1,12 +1,22 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+
 import CustomButton from "../components/CustomButton";
 
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const handleInput = (event) => {
+    console.log(event);
+  };
   return (
     <div
       className="bg-cover bg-center bg-fixed "
       style={{
-        "background-image": `url("https://wallpapercg.com/media/ts_orig/22626.webp")`,
+        backgroundImage: `url("https://wallpapercg.com/media/ts_orig/22626.webp")`,
       }}
     >
       <div className="h-screen flex justify-center items-center">
@@ -14,28 +24,50 @@ function Login() {
           <h1 className="text-2xl font-bold mb-8 text-center">
             Login Dashboard
           </h1>
-          <form>
+          <form onSubmit={handleSubmit(handleInput)} noValidate>
             <div className="mb-4">
               <label className="block text-sm font-semibold text-white mb-2">
                 Email Address
               </label>
               <input
-                className="border rounded w-full py-1 text-sm px-3 text-black  focus:outline-none focus:shadow-outline"
-                id="email"
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "This field is required.",
+                  },
+                  pattern: {
+                    value:
+                      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: "Email is not valid.",
+                  },
+                })}
+                className="border rounded w-full py-1 text-sm px-3 text-black   focus:outline-none focus:shadow-outline"
                 type="email"
                 placeholder="Enter your email address"
               />
+              <p className="error mt-1">{errors?.email?.message}</p>
             </div>
+
             <div className="mb-4">
               <label className="block font-semibold text-sm text-white mb-2">
                 Password
               </label>
               <input
-                className="border rounded w-full py-1 text-sm px-3 text-black mb-3  focus:outline-none focus:shadow-outline"
-                id="password"
+                className="border rounded w-full py-1 text-sm px-3 text-black  mb-1  focus:outline-none focus:shadow-outline"
                 type="password"
                 placeholder="Enter your password"
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "This field is required.",
+                  },
+                  maxLength: {
+                    value: 8,
+                    message: "Password must be 8 characters.",
+                  },
+                })}
               />
+              <p className="error">{errors?.password?.message}</p>
             </div>
             <div className="mb-6 flex justify-center">
               <CustomButton title="Login" />
