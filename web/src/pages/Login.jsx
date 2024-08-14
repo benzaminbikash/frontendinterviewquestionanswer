@@ -1,44 +1,41 @@
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { BASEURL } from "../constants/Constant";
-import CustomButton from "../components/CustomButton";
+import { addToken, LOGIN } from "../redux/LoginApi";
 import ThreeDot from "../components/ThreeDot";
-import { CONTEXT } from "../hooks/ContextApi";
+import CustomButton from "../components/CustomButton";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
-  const [data, setData] = useContext(CONTEXT);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  const { user, loading } = useSelector((state) => state?.login);
 
   const handleInput = async (event) => {
     const { email, password } = event;
-    setLoading(true);
-    const response = await fetch(`${BASEURL}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    setLoading(false);
-    const result = await response.json();
-    if (result.status == "success") {
-      toast(result.message);
-      localStorage.setItem("token", result.token);
-      setData(result.token);
+    const data = { email, password };
+    dispatch(LOGIN(data));
+  };
+
+  useEffect(() => {
+    if (user?.status == "success") {
+      console.log("Called me");
+      localStorage.setItem("token", user?.token);
+      dispatch(addToken(user?.token));
+      toast(user?.message);
       navigate("/");
     } else {
-      toast(result.message);
+      toast(user?.message);
     }
-  };
+  }, [user]);
+
   useEffect(() => {
     const auth = localStorage.getItem("token");
     if (auth) {
@@ -57,6 +54,7 @@ function Login() {
           <h1 className="text-2xl font-bold mb-8 text-center">
             Login Dashboard
           </h1>
+
           <form onSubmit={handleSubmit(handleInput)} noValidate>
             <div className="mb-4">
               <label className="block text-sm font-semibold text-white mb-2">

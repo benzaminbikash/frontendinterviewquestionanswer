@@ -1,12 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { removeToken } from "../redux/LoginApi";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logout = () => {
+    dispatch(removeToken());
+    localStorage.removeItem("token");
+    navigate("/");
+  };
   return (
     <div className=" bg-blue-950 text-white w-full p-2 h-12">
       <div className="flex justify-between px-10">
         <h1></h1>
         <h1>Hello Admin!</h1>
-        <button>Logout</button>
+        <button onClick={() => logout()}>Logout</button>
       </div>
     </div>
   );
