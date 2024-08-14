@@ -6,4 +6,7 @@
   .error {
     @apply text-red-500 text-sm;
   }
+  .title {
+    @apply font-bold text-xl;
+  }
 }

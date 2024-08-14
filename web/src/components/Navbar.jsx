@@ -8,8 +8,8 @@ function Navbar() {
   const navigate = useNavigate();
   const logout = () => {
     dispatch(removeToken());
+    navigate("/login");
     localStorage.removeItem("token");
-    navigate("/");
   };
   return (
     <div className=" bg-blue-950 text-white w-full p-2 h-12">

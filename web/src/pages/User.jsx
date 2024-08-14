@@ -1,23 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import UserList from "../components/UserList";
 import { getAllUser } from "../redux/UserApi";
 import CustomButton from "../components/CustomButton";
+import Loader from "../components/Loader";
+import Modal from "../components/Modal";
 
 export default function User() {
   const token = localStorage.getItem("token");
+  const [show, setShow] = useState(false);
+  const [select, setSelect] = useState(null);
+
   const { user, loading, error } = useSelector((item) => item.user);
+  console.log(user);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllUser(token));
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+  const userSelect = (user) => {
+    setSelect(user);
+  };
   return (
     <>
       <div className="flex justify-between  px-4 items-center mt-2 ">
         <h1 className="title">User List</h1>
-        <CustomButton title="Add User" />
       </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg px-2 mt-4">
@@ -47,11 +59,20 @@ export default function User() {
           </thead>
           <tbody>
             {user?.data?.map((item, index) => {
-              return <UserList item={item} key={index} index={index} />;
+              return (
+                <UserList
+                  item={item}
+                  key={index}
+                  index={index}
+                  setShow={setShow}
+                  selectUser={userSelect}
+                />
+              );
             })}
           </tbody>
         </table>
       </div>
+      {show && <Modal setShow={() => setShow(!show)} select={select} />}
     </>
   );
 }

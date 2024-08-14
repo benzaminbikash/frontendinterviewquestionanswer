@@ -4,7 +4,7 @@ import { BASEURL } from "../constants/Constant";
 export const LOGIN = createAsyncThunk(
   "user/login",
   async (data, { rejectWithValue }) => {
-    const response = await fetch(`${BASEURL}/login`, {
+    const response = await fetch(`${BASEURL}/adminlogin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

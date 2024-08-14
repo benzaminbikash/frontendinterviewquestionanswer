@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { addToken, LOGIN } from "../redux/LoginApi";
 import ThreeDot from "../components/ThreeDot";
 import CustomButton from "../components/CustomButton";
-import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const navigate = useNavigate();
