@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import UserList from "../components/UserList";
 import { getAllUser } from "../redux/UserApi";
-import CustomButton from "../components/CustomButton";
 import Loader from "../components/Loader";
 import Modal from "../components/Modal";
 
@@ -13,7 +12,6 @@ export default function User() {
   const [select, setSelect] = useState(null);
 
   const { user, loading, error } = useSelector((item) => item.user);
-  console.log(user);
   const dispatch = useDispatch();
 
   useEffect(() => {

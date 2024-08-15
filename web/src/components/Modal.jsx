@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CustomButton from "./CustomButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllUser, updateUser } from "../redux/UserApi";
+import { toast } from "react-toastify";
 
 function Modal({ setShow, select }) {
   const [role, setRole] = useState("");
@@ -22,6 +23,7 @@ function Modal({ setShow, select }) {
     dispatch(updateUser(data)).then(() => {
       dispatch(getAllUser(token));
       setShow();
+      toast("Update User Successfully");
     });
   };
 
