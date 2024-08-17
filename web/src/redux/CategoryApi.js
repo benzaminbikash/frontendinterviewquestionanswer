@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { BASEURL } from "../constants/Constant";
-import { json } from "react-router-dom";
 
 export const getAllCategory = createAsyncThunk(
   "get/category",
@@ -39,6 +38,25 @@ export const addCategory = createAsyncThunk(
         Accept: "multipart/form-data",
       },
       body: data,
+    });
+    const result = await response.json();
+    try {
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateCategory = createAsyncThunk(
+  "update/category",
+  async (data, { rejectWithValue }) => {
+    const response = await fetch(`${BASEURL}/updatecategory/${data.id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "multipart/form-data",
+      },
+      body: data.category,
     });
     const result = await response.json();
     try {
@@ -100,6 +118,19 @@ export const CATEGORY = createSlice({
       state.category.data.push(action.payload.data);
     });
     builder.addCase(addCategory.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // updatecategory
+    builder.addCase(updateCategory.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateCategory.fulfilled, (state, action) => {
+      state.category.data = state.category.data.map((item) => {
+        item._id === action.payload._id ? action.payload : item;
+      });
+    });
+    builder.addCase(updateCategory.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

@@ -21,9 +21,10 @@ export default function User() {
   if (loading) {
     return <Loader />;
   }
-  const userSelect = (user) => {
-    setSelect(user);
+  const userSelect = (item) => {
+    setSelect(item);
   };
+
   return (
     <>
       <div className="flex justify-between  px-4 items-center mt-2 ">

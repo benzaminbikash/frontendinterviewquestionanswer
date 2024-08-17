@@ -2,12 +2,14 @@ import React from "react";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteCategory, getAllCategory } from "../redux/CategoryApi";
+import { toast } from "react-toastify";
 
-function CategoryList({ item, index }) {
+function CategoryList({ item, index, selectCategory, show }) {
   const dispatch = useDispatch();
   const deletecategory = (id) => {
     dispatch(deleteCategory(id)).then(() => {
       dispatch(getAllCategory());
+      toast("Delete Category Successfully!");
     });
   };
   return (
@@ -19,17 +21,21 @@ function CategoryList({ item, index }) {
         >
           {index + 1}
         </th>
-        <td className="px-6 py-4 text-white">{item.title}</td>
+        <td className="px-6 py-4 text-white">{item?.title}</td>
         <td className="px-6 py-4 text-white">
           <img
-            src={item.image}
+            src={item?.image}
             alt="randomImage"
             style={{ width: 40, height: 40, borderRadius: 60 }}
           />
         </td>
         <td className="px-6 py-4  ">
-          <div className="flex gap-3 items-center justify-center">
-            <button>
+          <div className="flex gap-3 items-center ">
+            <button
+              onClick={() => {
+                selectCategory(item), show();
+              }}
+            >
               <MdModeEdit size={20} color="white" />
             </button>
             <button onClick={() => deletecategory(item._id)}>
