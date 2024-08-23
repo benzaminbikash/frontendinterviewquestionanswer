@@ -7,9 +7,7 @@ import CategoryList from "../components/CategoryList";
 import CategoryModel from "../components/CategoryModel";
 
 export default function Category() {
-  const { category, loading, error, setValue } = useSelector(
-    (state) => state.category
-  );
+  const { category, loading, error } = useSelector((state) => state.category);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [select, setSelect] = useState(null);
