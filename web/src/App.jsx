@@ -7,6 +7,7 @@ import Category from "./pages/Category";
 import ProtectRouter from "./utils/ProtectRouter";
 import Error from "./pages/NotFound";
 import Question from "./pages/Question";
+import QuestionAdd from "./pages/QuestionAdd";
 
 export default function App() {
   return (
@@ -16,8 +17,9 @@ export default function App() {
         <Route path="/" element={<Home />}>
           <Route path="user" element={<User />} />
           <Route path="category" element={<Category />} />
-          <Route path="question" element={<Question />} />
+          <Route path="question/" element={<Question />} />
         </Route>
+        <Route path="/question/:title" element={<QuestionAdd />} />
       </Route>
       <Route path="/*" element={<Error />} />
     </Routes>
