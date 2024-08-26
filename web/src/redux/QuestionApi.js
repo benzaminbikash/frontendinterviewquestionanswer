@@ -65,7 +65,7 @@ export const updateQuestion = createAsyncThunk(
       headers: {
         Accept: "multipart/form-data",
       },
-      body: data.category,
+      body: data.question,
     });
     const result = await response.json();
     try {

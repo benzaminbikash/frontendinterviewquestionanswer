@@ -1,8 +1,9 @@
 import React from "react";
-import { MdDelete, MdModeEdit } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { deleteCategory, getAllCategory } from "../redux/CategoryApi";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { MdDelete, MdModeEdit } from "react-icons/md";
+
+import { deleteCategory, getAllCategory } from "../redux/CategoryApi";
 
 function CategoryList({ item, index, selectCategory, show }) {
   const dispatch = useDispatch();

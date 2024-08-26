@@ -36,7 +36,6 @@ function CategoryModel({ setShow, select }) {
   };
 
   const updateInput = (value) => {
-    console.log("update input");
     const file = value.file[0];
     const formData = new FormData();
     formData.append("title", value.title);
