@@ -31,7 +31,6 @@ export const deleteCategory = createAsyncThunk(
 export const addCategory = createAsyncThunk(
   "add/category",
   async (data, { rejectWithValue }) => {
-    console.log(data);
     const response = await fetch(`${BASEURL}/addcategory`, {
       method: "POST",
       headers: {
