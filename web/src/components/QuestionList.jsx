@@ -50,13 +50,13 @@ function QuestionList({
             {/* for points */}
             <div className="">{item?.points?.heading}</div>
             {item?.points?.point.map((item, index) => (
-              <li>{item}</li>
+              <li key={index}>{item}</li>
             ))}
             {item?.image && (
               <img
                 src={item.image}
                 alt="randomImage"
-                className="w-[300px] h-[500px] object-cover"
+                className=" w-[30%] h-[30%] object-contain"
               />
             )}
             <div className="flex gap-3 items-center  justify-end mt-2">

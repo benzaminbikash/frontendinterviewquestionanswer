@@ -1,5 +1,6 @@
 import React from "react";
 import { GoDotFill } from "react-icons/go";
+import { RxCross2 } from "react-icons/rx";
 
 function PointList({ item, removePoint }) {
   return (

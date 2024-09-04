@@ -30,9 +30,13 @@ export const getQuiz = createAsyncThunk(
 export const addQuiz = createAsyncThunk(
   "add/quiz",
   async (data, { rejectWithValue }) => {
+    console.log("add Quiz", data);
     const response = await fetch(`${BASEURL}/quiz`, {
       method: "POST",
-      body: data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
     const result = await response.json();
     try {
@@ -48,7 +52,10 @@ export const updateQuiz = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     const response = await fetch(`${BASEURL}/quiz/${data.id}`, {
       method: "PUT",
-      body: data.quiz,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data.quiz),
     });
     const result = await response.json();
     try {
