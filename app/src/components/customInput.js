@@ -5,15 +5,15 @@ const CustomInput = ({
   type = "text",
   label,
   secureTextEntry = false,
-  setData,
+  onChange,
 }) => {
   return (
     <View className="mb-5">
       <Text className="text-white mb-2 font-bold">{label} </Text>
       <TextInput
-        onChangeText={(e) => setData(e)}
         keyboardType={type}
         secureTextEntry={secureTextEntry}
+        onChangeText={(e) => onChange(e)}
         style={{
           borderColor: "white",
           borderWidth: 1,
