@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASEURL } from "../../constants/constants";
 
 export const USER = createApi({
   reducerPath: "User",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://programminginterviewquestionandanswer.vercel.app/api/v4",
+    baseUrl: `${BASEURL}`,
   }),
   endpoints: (builder) => ({
     registration: builder.mutation({

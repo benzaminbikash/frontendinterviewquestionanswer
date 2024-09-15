@@ -7,30 +7,42 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import Lineargradient from "../components/lineargradient";
 import CustomInput from "../components/customInput";
 import CustomButton from "../components/customButton";
-import { useNavigation } from "@react-navigation/native";
-
+import { StackActions, useNavigation } from "@react-navigation/native";
+import { useLoginMutation } from "../redux/API/userApi";
+import { useDispatch } from "react-redux";
+import { addToken } from "../redux/API/token";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
+
   const handleForm = async () => {
-    const response = await fetch(
-      "https://programminginterviewquestionandanswer.vercel.app/api/v4/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+    if (!email || !password) {
+      Alert.alert("Error", "Email and password are required!");
+    } else {
+      const data = {
+        email,
+        password,
+      };
+      const response = await login(data);
+      if (response.error) {
+        Alert.alert("Error", response.error.data.message);
+      } else {
+        Alert.alert(response.data.message);
+        await AsyncStorage.setItem("AUTH", response.data.token);
+        dispatch(addToken(response.data.token));
+        navigation.dispatch(StackActions.replace("main"));
       }
-    );
-    const result = await response.json();
-    console.log(result);
+    }
   };
   return (
     <TouchableWithoutFeedback>
@@ -44,12 +56,12 @@ const LoginScreen = () => {
             <CustomInput
               label="Email:"
               type="email-address"
-              setData={setEmail}
+              onChange={setEmail}
             />
             <CustomInput
               label="Password:"
               secureTextEntry={true}
-              setData={setPassword}
+              onChange={setPassword}
             />
             <CustomButton title="Login" Pressed={() => handleForm()} />
             <View className="flex-row gap-1 justify-center mt-2 ">

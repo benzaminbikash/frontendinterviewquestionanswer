@@ -11,6 +11,7 @@ import QuizScreen from "./screens/QuizScreen";
 import QuestionScreen from "./screens/QuestionScreen";
 import AnswerScreen from "./screens/AnswerScreen";
 import { StatusBar } from "react-native";
+import CustomDrawer from "./components/CustomDrawer";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,6 +48,9 @@ function Tablogic() {
 function Main() {
   return (
     <Drawer.Navigator
+      drawerContent={(props) => {
+        return <CustomDrawer {...props} />;
+      }}
       screenOptions={{
         headerStyle: {
           backgroundColor: "#6441A5",

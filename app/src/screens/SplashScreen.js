@@ -3,13 +3,28 @@ import React, { useEffect } from "react";
 import Lineargradient from "../components/lineargradient";
 import { COLORS } from "../constants/colors";
 import { StackActions, useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { addToken } from "../redux/API/token";
 
 const SplashScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const CheckUser = async () => {
+    const AUTH = await AsyncStorage.getItem("AUTH");
+    if (AUTH != null) {
+      navigation.dispatch(StackActions.replace("main"));
+      dispatch(addToken(AUTH));
+    } else {
+      navigation.dispatch(StackActions.replace("auth"));
+    }
+  };
+
   useEffect(() => {
     setTimeout(() => {
-      navigation.dispatch(StackActions.replace("auth"));
-    }, 3000);
+      CheckUser();
+    }, 2000);
   }, []);
   return (
     <Lineargradient colors={[COLORS.linear1, COLORS.linear2, COLORS.linear3]}>
