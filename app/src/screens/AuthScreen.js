@@ -8,11 +8,13 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
-import Lineargradient from "../components/lineargradient";
+import { useNavigation } from "@react-navigation/native";
+
 import CustomInput from "../components/customInput";
 import CustomButton from "../components/customButton";
-import { useNavigation } from "@react-navigation/native";
+import Lineargradient from "../components/lineargradient";
 import { useRegistrationMutation } from "../redux/API/userApi";
+
 const AuthScreen = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");

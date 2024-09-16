@@ -1,29 +1,31 @@
-import { View, Text, Image } from "react-native";
 import React, { useCallback } from "react";
+import Entypo from "@expo/vector-icons/Entypo";
+import { View, Text, Image } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Entypo from "@expo/vector-icons/Entypo";
-import { useDispatch, useSelector } from "react-redux";
-import { useMyDataQuery } from "../redux/API/userApi";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
 import { removeToken } from "../redux/API/token";
+import { useMyDataQuery } from "../redux/API/userApi";
 
 const CustomDrawer = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state?.auth?.token);
 
-  const { data: user, error } = useMyDataQuery(auth, {
+  const { data: user } = useMyDataQuery(auth, {
     skip: !auth,
   });
 
   const logoutUser = useCallback(() => {
-    console.log("logout");
     navigation.dispatch(StackActions.replace("login"));
     dispatch(removeToken());
   }, [dispatch, navigation]);
+
+  const totalScore = user?.data?.score?.totalScore || 0;
   return (
     <SafeAreaView clasName="flex-1">
       <View className="w-full h-[200px] bg-[#6441A5] shadow-lg shadow-red-400 flex justify-center items-center">
@@ -50,7 +52,9 @@ const CustomDrawer = () => {
           {user?.data?.email}
         </Text>
 
-        <Text className="font-bold text-white  text-lg ">Your Score is: 0</Text>
+        <Text className="font-bold text-white  text-lg ">
+          Your Score is: {totalScore}
+        </Text>
       </View>
       <View className="m-1">
         <TouchableOpacity

@@ -28,7 +28,7 @@ function Quiz() {
 
   return (
     <>
-      <div className="p-2">
+      <div className="px-2">
         <div className="flex justify-between">
           <div></div>
           <h1 className="font-extrabold text-2xl text-center">Level of Quiz</h1>

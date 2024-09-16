@@ -10,7 +10,7 @@ function Home() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full">
+      <div className="ml-56 w-full">
         <Navbar />
         {homepath == "/" ? (
           <div className="flex flex-col w-full items-center h-screen pt-40">
@@ -20,7 +20,9 @@ function Home() {
             <h1 className="px-2  font-bold text-2xl">Arrange the data here!</h1>
           </div>
         ) : (
-          <Outlet />
+          <div className="mt-[53px]">
+            <Outlet />
+          </div>
         )}
       </div>
     </div>

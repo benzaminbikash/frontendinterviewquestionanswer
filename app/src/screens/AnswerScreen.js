@@ -7,10 +7,9 @@ import {
   StyleSheet,
 } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useRoute } from "@react-navigation/native";
 import Octicons from "@expo/vector-icons/Octicons";
-import { SCREEN } from "../constants/constants";
+import { useRoute } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const AnswerScreen = () => {
   const route = useRoute();

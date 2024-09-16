@@ -26,7 +26,7 @@ const sideitems = [
 
 function Sidebar() {
   return (
-    <div className="w-56 bg-blue-950 text-white h-screen p-2">
+    <div className="w-56 bg-blue-950 text-white h-screen p-2 fixed top-0 left-0 z-20 ">
       <Link to="/" className="text-2xl font-bold">
         Admin Panel
       </Link>

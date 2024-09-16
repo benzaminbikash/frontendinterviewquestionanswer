@@ -1,11 +1,12 @@
-import { View, Text } from "react-native";
 import React, { useEffect } from "react";
-import Lineargradient from "../components/lineargradient";
-import { COLORS } from "../constants/colors";
+import { View, Text } from "react-native";
+import { useDispatch } from "react-redux";
 import { StackActions, useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { COLORS } from "../constants/colors";
 import { addToken } from "../redux/API/token";
+import Lineargradient from "../components/lineargradient";
 
 const SplashScreen = () => {
   const navigation = useNavigation();

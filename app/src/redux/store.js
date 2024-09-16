@@ -4,6 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import TOKEN from "./API/token";
 import { CATEGORY } from "./API/categoryApi";
 import { QUESTION } from "./API/quetionAnserapi";
+import { QUIZ } from "./API/quizApi";
 
 export const store = configureStore({
   reducer: {
@@ -11,12 +12,14 @@ export const store = configureStore({
     [USER.reducerPath]: USER.reducer,
     [CATEGORY.reducerPath]: CATEGORY.reducer,
     [QUESTION.reducerPath]: QUESTION.reducer,
+    [QUIZ.reducerPath]: QUIZ.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       USER.middleware,
       CATEGORY.middleware,
-      QUESTION.middleware
+      QUESTION.middleware,
+      QUIZ.middleware
     ),
 });
 

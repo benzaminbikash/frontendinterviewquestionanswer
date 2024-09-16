@@ -1,12 +1,12 @@
-import { FlatList, StatusBar, Text, View } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Question from "../components/question";
-import { useRoute } from "@react-navigation/native";
-import { useGetQuestionAnswerQuery } from "../redux/API/quetionAnserapi";
-import LoadingUi from "../components/loadingUi";
-import { SCREEN } from "../constants/constants";
 import LottieView from "lottie-react-native";
+import { useRoute } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList, StatusBar, Text, View } from "react-native";
+
+import Question from "../components/question";
+import LoadingUi from "../components/loadingUi";
+import { useGetQuestionAnswerQuery } from "../redux/API/quetionAnserapi";
 
 const QuestionScreen = () => {
   const router = useRoute();

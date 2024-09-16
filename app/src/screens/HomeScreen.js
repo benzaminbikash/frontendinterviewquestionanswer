@@ -1,8 +1,9 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useGetCategoryQuery } from "../redux/API/categoryApi";
+
 import LoadingUi from "../components/loadingUi";
+import { useGetCategoryQuery } from "../redux/API/categoryApi";
 
 const HomeScreen = () => {
   const navigation = useNavigation();

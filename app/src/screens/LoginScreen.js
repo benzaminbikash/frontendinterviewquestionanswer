@@ -1,24 +1,23 @@
 import {
   View,
   Text,
-  TextInput,
   TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
   ScrollView,
   TouchableOpacity,
   Alert,
   ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
-import Lineargradient from "../components/lineargradient";
+import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StackActions, useNavigation } from "@react-navigation/native";
+
+import { addToken } from "../redux/API/token";
 import CustomInput from "../components/customInput";
 import CustomButton from "../components/customButton";
-import { StackActions, useNavigation } from "@react-navigation/native";
 import { useLoginMutation } from "../redux/API/userApi";
-import { useDispatch } from "react-redux";
-import { addToken } from "../redux/API/token";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import Lineargradient from "../components/lineargradient";
+
 const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
