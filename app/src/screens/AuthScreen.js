@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
 import Lineargradient from "../components/lineargradient";
@@ -19,7 +20,7 @@ const AuthScreen = () => {
   const [mobile, setMobile] = useState();
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
-  const [registration] = useRegistrationMutation();
+  const [registration, { isLoading }] = useRegistrationMutation();
 
   const Registration = async () => {
     if (!name || !email || !mobile || !password || !cpassword) {
@@ -73,7 +74,16 @@ const AuthScreen = () => {
               secureTextEntry={true}
               onChange={setCPassword}
             />
-            <CustomButton title="Sign Up" Pressed={() => Registration()} />
+            <CustomButton
+              title={
+                isLoading ? (
+                  <ActivityIndicator color={"white"} size={25} />
+                ) : (
+                  "Sign Up"
+                )
+              }
+              Pressed={() => Registration()}
+            />
             <View className="flex-row gap-1 justify-center mt-2  items-center">
               <Text className="text-white text-sm">
                 Already have an account?

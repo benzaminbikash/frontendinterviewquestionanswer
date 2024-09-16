@@ -27,7 +27,17 @@ export const USER = createApi({
         body: data,
       }),
     }),
+    myData: builder.query({
+      query: (token) => ({
+        url: "/mydata",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useRegistrationMutation, useLoginMutation } = USER;
+export const { useRegistrationMutation, useLoginMutation, useMyDataQuery } =
+  USER;

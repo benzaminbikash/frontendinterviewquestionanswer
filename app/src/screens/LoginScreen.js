@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
 import Lineargradient from "../components/lineargradient";
@@ -22,7 +23,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
 
   const handleForm = async () => {
@@ -63,10 +64,19 @@ const LoginScreen = () => {
               secureTextEntry={true}
               onChange={setPassword}
             />
-            <CustomButton title="Login" Pressed={() => handleForm()} />
+            <CustomButton
+              title={
+                isLoading ? (
+                  <ActivityIndicator color={"white"} size={25} />
+                ) : (
+                  "Login"
+                )
+              }
+              Pressed={() => handleForm()}
+            />
             <View className="flex-row gap-1 justify-center mt-2 ">
               <Text className="text-white text-sm">Don't have an account?</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("auth")}>
                 <Text className=" text-blue-500 text-sm">Sign Up</Text>
               </TouchableOpacity>
             </View>
