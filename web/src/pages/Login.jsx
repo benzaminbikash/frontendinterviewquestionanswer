@@ -92,10 +92,6 @@ function Login() {
                     value: true,
                     message: "This field is required.",
                   },
-                  minLength: {
-                    value: 8,
-                    message: "Password must be 8 characters.",
-                  },
                 })}
               />
               <p className="error">{errors?.password?.message}</p>

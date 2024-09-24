@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  StatusBar,
 } from "react-native";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -73,12 +74,18 @@ const LoginScreen = () => {
               }
               Pressed={() => handleForm()}
             />
+            <TouchableOpacity onPress={() => navigation.navigate("forget")}>
+              <Text className=" text-blue-500 text-sm text-center mt-4">
+                Forget Password
+              </Text>
+            </TouchableOpacity>
             <View className="flex-row gap-1 justify-center mt-2 ">
               <Text className="text-white text-sm">Don't have an account?</Text>
               <TouchableOpacity onPress={() => navigation.navigate("auth")}>
                 <Text className=" text-blue-500 text-sm">Sign Up</Text>
               </TouchableOpacity>
             </View>
+            <StatusBar backgroundColor="#6441A5" />
           </ScrollView>
         </View>
       </Lineargradient>

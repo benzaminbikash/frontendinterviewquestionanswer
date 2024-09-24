@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  StatusBar,
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -54,6 +55,7 @@ const AuthScreen = () => {
             showsVerticalScrollIndicator={false}
             pagingEnabled={false}
           >
+            <StatusBar backgroundColor="#6441A5" />
             <Text className="text-white font-bold text-4xl  my-5">Sign Up</Text>
             <CustomInput label="Name:" onChange={setName} />
             <CustomInput

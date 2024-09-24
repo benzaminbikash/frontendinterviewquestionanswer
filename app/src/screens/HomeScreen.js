@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import LoadingUi from "../components/loadingUi";
@@ -34,6 +41,7 @@ const HomeScreen = () => {
             );
           })}
         </View>
+        <StatusBar backgroundColor="#6441A5" />
       </ScrollView>
     </View>
   );

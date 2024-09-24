@@ -3,8 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-
-import { StatusBar } from "react-native";
 import AuthScreen from "./screens/AuthScreen";
 import HomeScreen from "./screens/HomeScreen";
 import QuizScreen from "./screens/QuizScreen";
@@ -14,6 +12,10 @@ import AnswerScreen from "./screens/AnswerScreen";
 import LevelWiseQuiz from "./screens/LevelWiseQuiz";
 import CustomDrawer from "./components/CustomDrawer";
 import QuestionScreen from "./screens/QuestionScreen";
+import ForgetScreen from "./screens/ForgetScreen";
+import OtpScreen from "./screens/OtpScreen";
+import PasswordScreen from "./screens/PasswordScreen";
+import PracticeQuestion from "./screens/PracticeQuestion";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -68,6 +70,15 @@ function Main() {
           headerTintColor: "white",
         }}
       />
+      <Drawer.Screen
+        name="practice"
+        component={PracticeQuestion}
+        options={{
+          headerTitle: "Practice Question",
+          headerTintColor: "white",
+          headerTitleAlign: "center",
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -88,8 +99,46 @@ const AppNavigator = () => {
         <Stack.Screen name="question" component={QuestionScreen} />
         <Stack.Screen name="answer" component={AnswerScreen} />
         <Stack.Screen name="level" component={LevelWiseQuiz} />
+        <Stack.Screen
+          name="forget"
+          component={ForgetScreen}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: "#6441A5",
+            },
+            headerTintColor: "white",
+            title: "",
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="otp"
+          component={OtpScreen}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: "#6441A5",
+            },
+            headerTintColor: "white",
+            title: "",
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="passwordchange"
+          component={PasswordScreen}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: "#6441A5",
+            },
+            headerTintColor: "white",
+            title: "",
+            headerShadowVisible: false,
+          }}
+        />
       </Stack.Navigator>
-      <StatusBar backgroundColor="#6441A5" />
     </NavigationContainer>
   );
 };
