@@ -19,9 +19,10 @@ export const addQuestion = createAsyncThunk(
     const response = await fetch(`${BASEURL}/questionanswer`, {
       method: "POST",
       headers: {
-        Accept: "multipart/form-data",
+        // Accept: "multipart/form-data",
+        "Content-Type": "application/json",
       },
-      body: data,
+      body: JSON.stringify(data),
     });
     const result = await response.json();
     try {

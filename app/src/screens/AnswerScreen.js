@@ -8,16 +8,20 @@ import {
 } from "react-native";
 import React from "react";
 import Octicons from "@expo/vector-icons/Octicons";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import SyntaxHighlighter from "react-native-syntax-highlighter";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import CustomButton from "../components/customButton";
 
 const AnswerScreen = () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const { item } = route.params;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, paddingHorizontal: 10 }}>
           <Text className="text-2xl font-bold  mt-2 ">{item?.question}</Text>
 
@@ -42,8 +46,27 @@ const AnswerScreen = () => {
               </View>
             );
           })}
+          {item?.coding && (
+            <SyntaxHighlighter
+              language={"html"}
+              highlighter={"prism" || "hljs"}
+              style={dark}
+              customStyle={{ backgroundColor: "black" }}
+            >
+              {item?.coding}
+            </SyntaxHighlighter>
+          )}
 
-          <Image source={{ uri: item?.image }} style={styles.image} />
+          {item?.youtubelink && (
+            <View className="w-40  mt-2 h-24">
+              <CustomButton
+                title={"Show Video"}
+                Pressed={() => {
+                  navigation.navigate("youtube", { link: item?.youtubelink });
+                }}
+              />
+            </View>
+          )}
         </View>
       </ScrollView>
       <StatusBar backgroundColor="white" />

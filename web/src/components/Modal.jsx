@@ -14,17 +14,23 @@ function Modal({ setShow, select }) {
   }, [select]);
 
   const userUpdate = async (e) => {
-    const data = {
-      id: select._id,
-      role: role,
-    };
     e.preventDefault();
-    const token = localStorage.getItem("token");
-    dispatch(updateUser(data)).then(() => {
-      dispatch(getAllUser(token));
-      setShow();
-      toast("Update User Successfully");
-    });
+    const validRoles = ["admin", "user"];
+    if (!validRoles.includes(role.toLowerCase())) {
+      toast("Role must be either 'admin' or 'user'");
+    } else {
+      const data = {
+        id: select._id,
+        role: role,
+      };
+      e.preventDefault();
+      const token = localStorage.getItem("token");
+      dispatch(updateUser(data)).then(() => {
+        dispatch(getAllUser(token));
+        setShow();
+        toast("Update User Successfully");
+      });
+    }
   };
 
   return (

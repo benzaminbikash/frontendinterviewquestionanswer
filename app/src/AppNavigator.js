@@ -16,6 +16,7 @@ import ForgetScreen from "./screens/ForgetScreen";
 import OtpScreen from "./screens/OtpScreen";
 import PasswordScreen from "./screens/PasswordScreen";
 import PracticeQuestion from "./screens/PracticeQuestion";
+import YoutubeVideo from "./screens/YoutubeVideo";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -99,6 +100,8 @@ const AppNavigator = () => {
         <Stack.Screen name="question" component={QuestionScreen} />
         <Stack.Screen name="answer" component={AnswerScreen} />
         <Stack.Screen name="level" component={LevelWiseQuiz} />
+        <Stack.Screen name="youtube" component={YoutubeVideo} />
+
         <Stack.Screen
           name="forget"
           component={ForgetScreen}

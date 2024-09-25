@@ -37,7 +37,6 @@ const LevelWiseQuiz = () => {
           },
         };
         const data = await playQuiz(item);
-        console.log(data);
         Alert.alert(
           "Thank you for completing the quiz!",
           `Your total score is ${totalScore}. ${data.data.message}`,

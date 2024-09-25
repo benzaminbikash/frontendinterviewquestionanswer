@@ -4,6 +4,8 @@ import { MdDelete, MdModeEdit } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteQuestion, getQuestionbyCategory } from "../redux/QuestionApi";
 import { toast } from "react-toastify";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 function QuestionList({
   item,
@@ -12,8 +14,10 @@ function QuestionList({
   index,
   setShow,
   setSelectData,
+  method,
 }) {
   const dispatch = useDispatch();
+  const langaugae = method.toLowerCase();
   return (
     <div className="mt-4">
       <div className="w-full shadow-2xl bg-gray-300 p-3 mb-7">
@@ -52,12 +56,26 @@ function QuestionList({
             {item?.points?.point.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
-            {item?.image && (
-              <img
-                src={item.image}
-                alt="randomImage"
-                className=" w-[30%] h-[30%] object-contain"
-              />
+            {item?.coding && (
+              <SyntaxHighlighter
+                language={langaugae}
+                // customStyle={{
+                //   backgroundColor: "black",
+                //   height: 300,
+                // }}
+              >
+                {item?.coding}
+              </SyntaxHighlighter>
+            )}
+            {item?.youtubelink && (
+              <iframe
+                width="560"
+                height="315"
+                src={
+                  "https://www.youtube.com/embed/HBCf2qDeVGQ?si=No4TVQ1rmo_ZtLIX"
+                }
+                title="GeeksforGeeks"
+              ></iframe>
             )}
             <div className="flex gap-3 items-center  justify-end mt-2">
               <button>

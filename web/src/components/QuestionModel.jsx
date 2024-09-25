@@ -19,7 +19,8 @@ function QuestionModal({ setShow, categoryId, selectData }) {
   const [heading, setHeading] = useState("");
   const [points, setPoints] = useState([]);
   const [point, setPoint] = useState("");
-  const [image, setImage] = useState(null);
+  const [coding, setCoding] = useState(``);
+  const [youtubelink, setYoutubeLink] = useState("");
 
   const removeAnswer = (i) => {
     const index = answers.findIndex((item) => item == i);
@@ -38,20 +39,18 @@ function QuestionModal({ setShow, categoryId, selectData }) {
     if (!question) {
       toast("Question is required.");
     } else {
-      const formdata = new FormData();
-      formdata.append("question", question);
-      answers.forEach((ans, index) => {
-        formdata.append(`answer[${index}]`, ans);
-      });
-      formdata.append("points.heading", heading);
-      points.forEach((poi, index) => {
-        formdata.append(`points.point[${index}]`, poi);
-      });
-      {
-        image != null && formdata.append("image", image);
-      }
-      formdata.append("category", categoryId);
-      dispatch(addQuestion(formdata));
+      const data = {
+        question: question,
+        answer: answers,
+        points: {
+          heading: heading,
+          point: points,
+        },
+        category: categoryId,
+        coding: coding,
+        youtubelink: youtubelink,
+      };
+      dispatch(addQuestion(data));
       dispatch(getQuestionbyCategory(categoryId));
       setShow();
       toast("Question Added Successfully.");
@@ -64,7 +63,8 @@ function QuestionModal({ setShow, categoryId, selectData }) {
       setAnswers(selectData?.answer);
       setHeading(selectData?.points?.heading);
       setPoints(selectData?.points?.point);
-      setImage(selectData?.image);
+      setCoding(selectData?.coding);
+      setYoutubeLink(selectData?.youtubelink);
     }
   }, [selectData]);
 
@@ -79,10 +79,9 @@ function QuestionModal({ setShow, categoryId, selectData }) {
     points.forEach((poi, index) => {
       formdata.append(`points.point[${index}]`, poi);
     });
-    {
-      image != null && formdata.append("image", image);
-    }
     formdata.append("category", categoryId);
+    formdata.append("coding", coding);
+    formdata.append("youtubelink", youtubelink);
     const data = {
       id: selectData._id,
       question: formdata,
@@ -178,11 +177,21 @@ function QuestionModal({ setShow, categoryId, selectData }) {
           {points.map((item, index) => (
             <PointList item={item} key={index} removePoint={removePoint} />
           ))}
-          <label className="mt-10">Image</label>
+          <label>Coding</label>
+          <textarea
+            rows="6"
+            cols="60"
+            value={coding}
+            onChange={(e) => setCoding(e.target.value)}
+            name="coding"
+            className="border rounded w-full py-1 text-sm px-3 text-black focus:outline-none focus:shadow-outline"
+          />
+
+          <label>Video Link</label>
           <input
-            onChange={(e) => setImage(e.target.files[0])}
-            name="image"
-            type="file"
+            value={youtubelink}
+            onChange={(e) => setYoutubeLink(e.target.value)}
+            name="youtubelink"
             className="border rounded w-full py-1 text-sm px-3 text-black focus:outline-none focus:shadow-outline"
           />
 
