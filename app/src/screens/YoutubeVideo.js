@@ -11,7 +11,7 @@ const YoutubeVideo = () => {
       source={{
         uri: `${link}`,
       }}
-      style={{ flex: 1 }}
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     />
   );
 };

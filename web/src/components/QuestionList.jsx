@@ -71,9 +71,7 @@ function QuestionList({
               <iframe
                 width="560"
                 height="315"
-                src={
-                  "https://www.youtube.com/embed/HBCf2qDeVGQ?si=No4TVQ1rmo_ZtLIX"
-                }
+                src={item?.youtubelink}
                 title="GeeksforGeeks"
               ></iframe>
             )}

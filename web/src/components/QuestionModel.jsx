@@ -70,21 +70,19 @@ function QuestionModal({ setShow, categoryId, selectData }) {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    const formdata = new FormData();
-    formdata.append("question", question);
-    answers.forEach((ans, index) => {
-      formdata.append(`answer[${index}]`, ans);
-    });
-    formdata.append("points.heading", heading);
-    points.forEach((poi, index) => {
-      formdata.append(`points.point[${index}]`, poi);
-    });
-    formdata.append("category", categoryId);
-    formdata.append("coding", coding);
-    formdata.append("youtubelink", youtubelink);
     const data = {
       id: selectData._id,
-      question: formdata,
+      question: {
+        question: question,
+        answer: answers,
+        points: {
+          heading: heading,
+          point: points,
+        },
+        category: categoryId,
+        coding: coding,
+        youtubelink: youtubelink,
+      },
     };
     dispatch(updateQuestion(data)).then(() => {
       dispatch(getQuestionbyCategory(categoryId));

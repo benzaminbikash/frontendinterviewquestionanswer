@@ -44,6 +44,26 @@ export const getQuestionbyCategory = createAsyncThunk(
     }
   }
 );
+
+export const updateQuestion = createAsyncThunk(
+  "update/question",
+  async (data, { rejectWithValue }) => {
+    const response = await fetch(`${BASEURL}/questionanswer/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data.question),
+    });
+    const result = await response.json();
+    try {
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const deleteQuestion = createAsyncThunk(
   "delete/question",
   async (id, { rejectWithValue }) => {
@@ -58,25 +78,6 @@ export const deleteQuestion = createAsyncThunk(
     }
   }
 );
-export const updateQuestion = createAsyncThunk(
-  "update/question",
-  async (data, { rejectWithValue }) => {
-    const response = await fetch(`${BASEURL}/questionanswer/${data.id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "multipart/form-data",
-      },
-      body: data.question,
-    });
-    const result = await response.json();
-    try {
-      return result;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
 export const QUESTION = createSlice({
   name: "question",
   initialState: {
